@@ -148,7 +148,7 @@ vector<Plank> PlaceByHighLine(vector<int> vec)
             _Planks[vec[t]].length = _Planks[vec[t]].width;
             _Planks[vec[t]].width = temp;
         }
-        int leftLength = 0;
+        int leftLength = 0;//剩余长度
         int start = 0;
         int failure_flag = 0;
         int success_flag = 0;
