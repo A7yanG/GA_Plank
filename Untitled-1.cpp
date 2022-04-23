@@ -206,7 +206,7 @@ vector<Plank> Place(vector<int> vec)
 {
     vector<Plank> _Planks = Planks;
     int leftLength = 120;//剩余长度
-    int leftWidth = 120;
+    int leftWidth = 120;//剩余宽度
     int preY = 0;
     for (int i = 0; i < N; i++)
     {
