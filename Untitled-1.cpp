@@ -151,7 +151,7 @@ vector<Plank> PlaceByHighLine(vector<int> vec)
         int leftLength = 0;//剩余长度
         int start = 0;
         int failure_flag = 0;
-        int success_flag = 0;
+        int success_flag = 0;//成功标志
         int i = 0;//行数
         while (!success_flag)
         {
