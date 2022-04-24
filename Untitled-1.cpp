@@ -272,7 +272,7 @@ void Select()
         SumFit += Fit[i];
     default_random_engine e(time(0));
     uniform_real_distribution<double> u(0, SumFit);
-    for (int t = 0; t < PopSize - 1; t++)
+    for (int t = 0; t < PopSize - 1; t++)//轮盘赌
     {
 
         double temp = u(e);
