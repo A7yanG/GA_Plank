@@ -268,20 +268,20 @@ void Select()
 {
     PopMain.push_back(BestIndividual); //保留适应度最高的个体
     double SumFit = 0;
-    for (int i = 0; i < PopSize; i++)
+    for (int i = 0; i < PopSize; i++)//计算适应度总和
         SumFit += Fit[i];
     default_random_engine e(time(0));
     uniform_real_distribution<double> u(0, SumFit);
     for (int t = 0; t < PopSize - 1; t++)//轮盘赌
     {
 
-        double temp = u(e);
+        double temp = u(e);//随机生成小数
         // cout<<"temp"<<t<<":"<<temp<<endl;
         double SumTemp = 0;
         for (int i = 0; i < PopSize; i++)
         {
             SumTemp += Fit[i];
-            if (SumTemp >= temp)
+            if (SumTemp >= temp)//累加值>=随机生成的值
             {
                 PopMain.push_back(PopMain[i]);
                 break;
@@ -418,13 +418,13 @@ int main()
         // cout<<"After Variation:"<<endl;
         // printPopulation();
     }
-    cout << "Last Population:" << endl;
-    printPopulation();
+    //cout << "Last Population:" << endl;
+    //printPopulation();
+    cout<<endl<<"迭代50次后："<<endl;
     cout << "bestsolution:" << endl;
     printIndividual(BestIndividual);
     cout << "Max_fitness:" << Max_fitness << endl;
     printTable();
-
     // vector<Plank> vec = PlaceByHighLine(PopMain[0]);
     // for (int i = 0; i < 120; i++)
     // {
