@@ -274,7 +274,6 @@ void Select()
     uniform_real_distribution<double> u(0, SumFit);
     for (int t = 0; t < PopSize - 1; t++)//轮盘赌
     {
-
         double temp = u(e);//随机生成小数
         // cout<<"temp"<<t<<":"<<temp<<endl;
         double SumTemp = 0;
@@ -378,11 +377,42 @@ void Get_best_solution()
         }
     }
 }
+
+// 计算两个矩形框的重叠面积
+int OverlapArea(Plank A,Plank B)
+{
+    int endx = max(A.x + A.length, B.x + B.length);//最右x坐标
+    int startx = min(A.x, B.x);
+    int length = A.length + B.length - (endx - startx);  // 重叠部分长
+    int endy = max(A.y + A.width, B.y+B.width);
+    int starty = min(A.y, B.y);
+    int width = A.width + B.width - (endy - starty);  // 重叠部分宽
+    if (length > 0 && width > 0) {
+        int area = length * width;  // 重叠部分面积
+        return area;
+    } else {
+        // 不重叠：算出来的length或width小于等于0
+        return 0;
+    }
+}
+bool IfAreaValid(Plank p,vector<Plank> _Planks){
+    cout<<_Planks.size()<<endl;
+    int Area=p.length*p.width;
+    int Sum=0;
+    vector<Plank>::iterator iter;
+    for(iter=_Planks.begin();iter!=_Planks.end();iter++)
+    {
+        Sum+=OverlapArea(p,*iter);
+        if(Sum*3>=2*Area)
+            return true;
+    }
+    return false;
+}
 int main()
 {
     Generate_Planks();  //生成木板
     Generate_PopMain(); //生成种群
-    int IterationNum = 50;
+    int IterationNum = 10;
     while (IterationNum--)
     {
         // cout<<"Firness:"<<endl;
@@ -425,13 +455,15 @@ int main()
     printIndividual(BestIndividual);
     cout << "Max_fitness:" << Max_fitness << endl;
     printTable();
-    // vector<Plank> vec = PlaceByHighLine(PopMain[0]);
-    // for (int i = 0; i < 120; i++)
-    // {
-    //     for (int j = 0; j < 120; j++)
-    //         cout << PlankTable[i][j];
-    //     cout << endl;
-    // }
+   
+    Plank p;
+    p.x=0;
+    p.y=90;
+    p.length=20;
+    p.width=20;
+    vector<Plank> _Planks = PlaceByHighLine(BestIndividual);
+    if(IfAreaValid(p,_Planks))
+        cout<<"vaild"<<endl;
     system("pause");
     return 0;
 }
