@@ -12,7 +12,7 @@ typedef struct Plank
     int x = 0;      //左上角x坐标
     int y = 0;      //左上角y坐标
     int length = 0; //长度
-    int width = 0;  //宽度
+    int width = 0;  //+++
 };
 
 static vector<Plank> Planks;        //木板数组
